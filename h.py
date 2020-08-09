@@ -12,13 +12,12 @@ def console():
     zd={'set shentou':set_shentou,'set tiquan':set_tiquan,'show cve':pocset.jihe,'show shentou':pocset.shentou,'show tiquan':pocset.tiquan,'help':explists.help,'show log':explists.update_log}
     while True:
         xuan = input('Manage>>>>')
-        if 'use' + sys.argv[0]:
-            print('exp/cve/' + xuan[4:8] + '/CVE-' + xuan[4:])
-            use(xuan)
+        if xuan in zd:
+            zd[xuan]()
         elif xuan == 'exit':
             break
-        elif xuan in zd:
-            zd[xuan]()
+        elif 'use' + sys.argv[0]:            
+            use(xuan)
 
         else:
             print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
