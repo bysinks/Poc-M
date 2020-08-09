@@ -5,25 +5,17 @@ def jihe():
     n = 1999
     while n<=2020:
         try:
-            a = 'exp/shentou' + '/' + str(n)
-            b = 'exp/tiquan' + '/' + str(n)
-            x = os.listdir(a)
+            b = 'exp/cve' + '/' + str(n)
             q = os.listdir(b)
-            if len(x)!=0:
-                m = str(x).replace("'", "").replace('[', '').replace(']', '').replace(',', '')
+            if len(q) != 0:
                 s = str(q).replace("'", "").replace('[', '').replace(']', '').replace(',', '')
-                tf=colored(m,'cyan')
-                tg=colored(s,'cyan')
-                print(tf,tg)
-            elif len(q) != 0:
-                m = str(x).replace("'", "").replace('[', '').replace(']', '').replace(',', '')
-                s = str(q).replace("'", "").replace('[', '').replace(']', '').replace(',', '')
-                tf = colored(m, 'cyan')
                 tg = colored(s, 'cyan')
-                print(tf, tg)
+                print(tg)
             n += 1
         except:
             break
+
+   
 
 def shentou():
     cve2011 = '''
