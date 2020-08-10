@@ -4,7 +4,7 @@ from termcolor import *
 def helps():
     logo='''
     [+]Poc-M
-    [+]0.0.1
+    [+]1.0.1
     [+]基于python3.8
     [+]更多请参照help命令
     [+]show log查看更新日志
