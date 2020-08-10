@@ -1,0 +1,24 @@
+#!/usr/bin/python3
+import os
+import sys
+
+
+try:
+    ml = sys.argv[1]
+    os.chdir('exp/cve/' + ml[0:4] + '/CVE-' + ml[0:])
+    while True:
+        try:
+            sys.stdout.write('CVE-' + ml[0:] + '_Manage>>>>')
+            sys.stdout.flush()
+            rce = sys.stdin.readline().strip()
+            if rce == 'fcd':
+                os.chdir('../../../../')
+                break
+            elif rce == 'exit':
+                sys.exit(0)
+            else:
+                os.system(rce)
+        except:
+            print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
+except:
+    pass
