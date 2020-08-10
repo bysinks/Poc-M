@@ -1,5 +1,6 @@
 # Poc-M
 python3 main.py 
+适用于linux和windows  目前macos可能会有点bug
 
     本脚本为管理复杂繁多的exp/poc而作,为平时工作提高效率，考虑到平时工具使用习惯，部分命令与其他工具并无不同，
                  风格我们尽量贴近msf，包含渗透和提权exp/poc 内置脚本默认皆为已公开nday。
@@ -34,3 +35,4 @@ python3 main.py
                  2、use功能上新，可一发入魂，直接抵达poc目录
 2020.08.09
                  1、use简化，目录结构重新分类，移除shentou/tiquan 全部cve编号的poc列入cve目录  
+                 2、目录结构更改     
