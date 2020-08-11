@@ -1,5 +1,8 @@
 import os
 from termcolor import *
+import colorama
+colorama.init()
+
 
 def helps():
     logo='''
@@ -56,7 +59,9 @@ def update_log():
                  2、use功能上新，可一发入魂，直接抵达poc目录
 2020.08.09
                  1、use简化，目录结构重新分类，移除shentou/tiquan 全部cve编号的poc列入cve目录 
-                 2、目录结构更改                
+                 2、目录结构更改  
+2020.08.10
+                 1、修复windows下无法输出颜色
 ******************************************************************************************************************************** 
     '''
     print(colored(logos,'cyan'))
