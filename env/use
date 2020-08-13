@@ -1,24 +1,163 @@
 #!/usr/bin/python3
 import os
 import sys
+import getopt
+import platform
 
 
-try:
-    ml = sys.argv[1]
-    os.chdir('exp/cve/' + ml[0:4] + '/CVE-' + ml[0:])
-    while True:
+class argv:
+    def __init__(self, argv):
+        opt, arg = getopt.getopt(argv, 'hv:c:p:w:l:', ['cve=', 'cms=', 'plugin=', 'windows=', 'linux=', 'help'])
+        for options, args in opt:
+            if options in ("-v", "--cve"):
+                self.cve(args)
+            elif options in ("-c", "--cms"):
+                self.cms(args)
+            elif options in ("-p", "--plugin"):
+                self.plugins(args)
+            elif options in ("-w", "--windows"):
+                self.w(args)
+            elif options in ("-l", "--linux"):
+                self.l(args)
+            elif options in ("-h", "--help"):
+                self.helps()
+
+    def cve(self, ml):
         try:
-            sys.stdout.write('CVE-' + ml[0:] + '_Manage>>>>')
-            sys.stdout.flush()
-            rce = sys.stdin.readline().strip()
-            if rce == 'fcd':
-                os.chdir('../../../../')
-                break
-            elif rce == 'exit':
-                sys.exit(0)
-            else:
-                os.system(rce)
+            os.chdir('exp/cve/' + ml[0:4] + '/CVE-' + ml[0:])
+            while True:
+                try:
+                    sys.stdout.write('CVE-' + ml[0:] + '_Manage>>>>')
+                    sys.stdout.flush()
+                    rce = sys.stdin.readline().strip()
+                    if rce == 'fcd':
+                        os.chdir('../../../../')
+                        break
+                    elif rce == 'exit':
+                        sys.exit(0)
+                    elif rce == 'help':
+                        if platform.system() == 'Linux':
+                            os.system('cat help.txt')
+                        elif platform.system() == 'Windows':
+                            os.system('type help.txt')
+                    else:
+                        os.system(rce)
+                except:
+                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
         except:
-            print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
-except:
-    pass
+            pass
+
+    def cms(self, cms):
+        try:
+            os.chdir('exp/cms/' + cms + '_cms')
+            while True:
+                try:
+                    sys.stdout.write(cms + '_Manage>>>>')
+                    sys.stdout.flush()
+                    rce = sys.stdin.readline().strip()
+                    if rce == 'fcd':
+                        os.chdir('../../../')
+                        break
+                    elif rce == 'exit':
+                        sys.exit()
+                    elif rce == 'help':
+                        if platform.system() == 'Linux':
+                            os.system('cat help.txt')
+                        elif platform.system() == 'Windows':
+                            os.system('type help.txt')
+                    else:
+                        os.system(rce)
+                except:
+                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
+        except:
+            pass
+
+    def plugins(self, plugin):
+        try:
+            os.chdir('exp/plugins/' + plugin)
+            while True:
+                try:
+                    sys.stdout.write(plugin + '_Manage>>>>')
+                    sys.stdout.flush()
+                    rce = sys.stdin.readline().strip()
+                    if rce == 'fcd':
+                        os.chdir('../../../')
+                        break
+                    elif rce == 'exit':
+                        sys.exit()
+                    elif rce == 'help':
+                        if platform.system() == 'Linux':
+                            os.system('cat help.txt')
+                        elif platform.system() == 'Windows':
+                            os.system('type help.txt')
+                    else:
+                        os.system(rce)
+                except:
+                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
+        except:
+            pass
+    def w(self, ve):
+        try:
+            os.chdir('exp/OS/windows/' + ve)
+            while True:
+                try:
+                    sys.stdout.write(ve + '_Manage>>>>')
+                    sys.stdout.flush()
+                    rce = sys.stdin.readline().strip()
+                    if rce == 'fcd':
+                        os.chdir('../../../../')
+                        break
+                    elif rce == 'exit':
+                        sys.exit()
+                    elif rce == 'help':
+                        if platform.system() == 'Linux':
+                            os.system('cat help.txt')
+                        elif platform.system() == 'Windows':
+                            os.system('type help.txt')
+                    else:
+                        os.system(rce)
+                except:
+                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
+        except:
+            pass
+
+    def l(self, version):
+        try:
+            os.chdir('exp/OS/linux/' + version)
+            while True:
+                try:
+                    sys.stdout.write(version + '_Manage>>>>')
+                    sys.stdout.flush()
+                    rce = sys.stdin.readline().strip()
+                    if rce == 'fcd':
+                        os.chdir('../../../../')
+                        break
+                    elif rce == 'exit':
+                        sys.exit()
+                    elif rce == 'help':
+                        if platform.system() == 'Linux':
+                            os.system('cat help.txt')
+                        elif platform.system() == 'Windows':
+                            os.system('type help.txt')
+                    else:
+                        os.system(rce)
+                except:
+                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
+        except:
+            pass
+
+    def helps(self):
+        help = '''
+    use <module>
+    -h/--help             
+    -v/--cve                      进入指定cve路径
+    -c/--cms                      进入指定cms路径
+    -p/--plugin                   进入指定组件路径
+    -w/--windows -l/--linux       进入指定系统路径              
+        '''
+        print(help)
+
+
+if __name__ == '__main__':
+    argvs = sys.argv[1:]
+    argv(argvs)
