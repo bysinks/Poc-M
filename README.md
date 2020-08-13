@@ -28,3 +28,6 @@ python3 main.py
             use -c cms
             use -p nginx
             use --linux centos5.5              直达poc下                
+
+env下适用于windows的模块上传至网盘或者自行编译，访问github太慢，就懒得放了。
+链接: https://pan.baidu.com/s/1Xm2Ti47MCwt1KeHdpbpQQQ  密码: rew9
