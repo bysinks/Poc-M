@@ -4,24 +4,72 @@ import random
 import platform
 import explists
 
-
 def console():
     logo=[explists.logo(),explists.logo2(),explists.logo3(),explists.logo4(),explists.logo5(),explists.logo6(),explists.logo7()]
     print(random.choice(logo))
+    mode = (
+        'help',
+        'use',
+        'show',
+        'exit',
+        'search',
+    )
+
+    options = (
+        '-v',
+        '--cve',
+        '-c',
+        '--cms',
+        '-p',
+        '--plugin',
+        '-w',
+        '-l',
+        '--linux',
+        '-h',
+        '--help',
+        'cve',
+        'qingdan',
+        'log',
+    )
     explists.helps()
-    zd={'set cve':set_cve,'show cve':explists.jihe,'show shentou':explists.shentou,'show tiquan':explists.tiquan,'help':explists.help,'show log':explists.update_log}
     if get_os() == 'Linux':
         h=Linux_hj()
         while True:
             sys.stdout.write('Manage>>>>')
             sys.stdout.flush()
-            xuan = sys.stdin.readline().strip()
-            if xuan in zd:
-                print(xuan)
-                zd[xuan]()
-            elif xuan == 'exit':
-                print(xuan)
-                break
+            xuan = sys.stdin.readline().strip().split(' ')
+            if xuan[0] in mode:
+                if xuan[0] == 'help':
+                    explists.help()
+                elif xuan[0]=='exit':
+                    break
+                elif xuan[0]=='search':
+                    search(xuan[1])
+                elif xuan[0]=='show':
+                    if xuan[1]=='cve':
+                        explists.jihe()
+                    elif xuan[1]=='qingdan':
+                        explists.qingdan()
+                    elif xuan[1]=='log':
+                        explists.update_log()
+                    else:
+                        print("invalid syntax!")
+                elif xuan[0]=='use':
+                    if xuan[1]=='-h' or xuan[1]=='--help':
+                        argvs.helps()
+                    elif xuan[1]=='-v' or xuan[1]=='--cve':
+                        argvs.cve(xuan[2])
+                    elif xuan[1]=='-c' or xuan[1]=='--cms':
+                        argvs.cms(xuan[2])
+                    elif xuan[1]=='-p' or xuan[1]=='--plugin':
+                        argvs.cms(xuan[2])
+                    elif xuan[1]=='-w' or xuan[1]=='--windows':
+                        argvs.plugins(xuan[2])
+                    elif xuan[1]=='-l' or xuan[1]=='--linux':
+                        argvs.plugins(xuan[2])
+                    else:
+                        print("invalid syntax!")
+
             else:
                 os.system(h+' && '+xuan)
 
@@ -41,6 +89,21 @@ def console():
             else:
                 os.system(xuan)
 
+    elif get_os()=='Darwin':
+        h = Linux_hj()
+        while True:
+            sys.stdout.write('Manage>>>>')
+            sys.stdout.flush()
+            xuan = sys.stdin.readline().strip()
+            if xuan in zd:
+                print(xuan)
+                zd[xuan]()
+            elif xuan == 'exit':
+                print(xuan)
+                break
+            else:
+                os.system(h + ' && ' + xuan)
+
 
 def get_os():
     return platform.system()
@@ -56,6 +119,10 @@ def Linux_hj():
     os.system('chmod +x env/*')
     return h
 
+def Darwin_hj():
+    path=get_path()
+    h='export PATH=$PATH:'+path
+    return h
 
 def Windows_hj():
     path=get_path()
@@ -64,150 +131,147 @@ def Windows_hj():
     huanjing=hs+';'+h
     return huanjing
 
-def set_cve():
-    try:
-        os.chdir('exp/cve')
-        while True:
-            sys.stdout.write('Manage>>>>')
-            sys.stdout.flush()
-            rce = sys.stdin.readline().strip()
-            if rce == 'fcd':
-                os.chdir('../..')
-                break
-            elif rce == 'exit':
-                sys.exit(0)
-            elif 'use ' in rce:
-                try:
-                    os.chdir(rce[4:8] + '/CVE-' + rce[4:])
-                    while True:
-                        sys.stdout.write('CVE-' + rce[4:] + '>>>')
-                        sys.stdout.flush()
-                        x = sys.stdin.readline().strip()
-                        if x == 'fcd':
-                            os.chdir('..')
-                            break
-                        elif x == 'exit':
-                            sys.exit(0)
-                        else:
-                            os.system(x)
-                except:
-                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
-            elif rce == int:
-                print('重新检查命令')
-            elif 'cd ' in rce:
-                try:
-                    os.chdir(rce[3:])
-                    while True:
-                        sys.stdout.write('Manage>>>>')
-                        sys.stdout.flush()
-                        a = sys.stdin.readline().strip()
-                        if a == 'fcd':
-                            os.chdir('..')
-                            break
-                        elif a == 'exit':
-                            sys.exit(0)
-                        elif 'use ' in rce:
-                            try:
-                                os.chdir('CVE-' + rce[4:])
-                                while True:
-                                    sys.stdout.write('CVE-' + rce[4:] + '>>>>')
-                                    sys.stdout.flush()
-                                    a = sys.stdin.readline().strip()
-                                    if a == 'fcd':
-                                        os.chdir('..')
-                                        break
-                                    elif a == 'exit':
-                                        sys.exit(0)
-                                    else:
-                                        os.system(a)
-                            except:
-                                print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
-                        elif 'cd ' in a:
-                            try:
-                                os.chdir(a[3:])
-                                while True:
-                                    sys.stdout.write('Manage>>>>')
-                                    sys.stdout.flush()
-                                    a = sys.stdin.readline().strip()
-                                    if a == 'fcd':
-                                        os.chdir('..')
-                                        break
-                                    elif a == 'exit':
-                                        sys.exit(0)
-                                    elif 'use ' in rce:
-                                        try:
-                                            os.chdir('CVE-' + rce[4:])
-                                            while True:
-                                                sys.stdout.write('CVE-' + rce[4:] + '>>>>')
-                                                sys.stdout.flush()
-                                                a = sys.stdin.readline().strip()
-                                                if a == 'fcd':
-                                                    os.chdir('..')
-                                                    break
-                                                elif a == 'exit':
-                                                    sys.exit(0)
-                                                else:
-                                                    os.system(a)
-                                        except:
-                                            print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
-                                    elif 'cd ' in a:
-                                        try:
-                                            os.chdir(a[3:])
-                                            while True:
-                                                sys.stdout.write('Manage>>>>')
-                                                sys.stdout.flush()
-                                                a = sys.stdin.readline().strip()
-                                                if a == 'fcd':
-                                                    os.chdir('..')
-                                                    break
-                                                elif a == 'exit':
-                                                    sys.exit(0)
-                                                elif 'use ' in rce:
-                                                    try:
-                                                        os.chdir('CVE-' + rce[4:])
-                                                        while True:
-                                                            sys.stdout.write('CVE-' + rce[4:] + '>>>>')
-                                                            sys.stdout.flush()
-                                                            a = sys.stdin.readline().strip()
-                                                            if a == 'fcd':
-                                                                os.chdir('..')
-                                                                break
-                                                            elif a == 'exit':
-                                                                sys.exit(0)
-                                                            else:
-                                                                os.system(a)
-                                                    except:
-                                                        print('?????????????当我打出？时，不是我有问题，是我觉得你有问题')
-                                                elif 'cd ' in a:
-                                                    try:
-                                                        os.chdir(rce[3:])
-                                                        while True:
-                                                            sys.stdout.write('Manage>>>>')
-                                                            sys.stdout.flush()
-                                                            a = sys.stdin.readline().strip()
-                                                            if a == 'fcd':
-                                                                os.chdir('..')
-                                                                break
-                                                            elif a == 'exit':
-                                                                sys.exit(0)
-                                                            else:
-                                                                os.system(a)
-                                                    except:
-                                                        print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
-                                                else:
-                                                    os.system(a)
-                                        except:
-                                            print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
-                                    else:
-                                        os.system(a)
-                            except:
-                                print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
-                        else:
-                            os.system(a)
-                except:
-                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
-            else:
-                os.system(rce)
-    except:
-        print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
+def search(ml):
+    v = ml[0:]
+    for i, j, n in os.walk('exp'):
+        p = str(i).replace('(', '').replace(')', '').replace('[', '').replace(']', '').replace("'", '').replace(',',
+                                                                                                                ' ')
+        a = p.rfind(v)
+        if v in p:
+            print(p[:a] + p[a:])
 
+class argvs:
+    def cve(ml):
+        try:
+            os.chdir('exp/cve/' + ml[0:4] + '/CVE-' + ml[0:])
+            while True:
+                try:
+                    sys.stdout.write('CVE-' + ml[0:] + '_Manage>>>>')
+                    sys.stdout.flush()
+                    rce = sys.stdin.readline().strip()
+                    if rce == 'fcd':
+                        os.chdir('../../../../')
+                        break
+                    elif rce == 'exit':
+                        sys.exit(0)
+                    elif rce == 'help':
+                        if platform.system() == 'Linux':
+                            os.system('cat help.txt')
+                        elif platform.system() == 'Windows':
+                            os.system('type help.txt')
+                    else:
+                        os.system(rce)
+                except:
+                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
+        except:
+            pass
+
+    def cms(cms):
+        try:
+            os.chdir('exp/cms/' + cms + '_cms')
+            while True:
+                try:
+                    sys.stdout.write(cms + '_Manage>>>>')
+                    sys.stdout.flush()
+                    rce = sys.stdin.readline().strip()
+                    if rce == 'fcd':
+                        os.chdir('../../../')
+                        break
+                    elif rce == 'exit':
+                        sys.exit()
+                    elif rce == 'help':
+                        if platform.system() == 'Linux':
+                            os.system('cat help.txt')
+                        elif platform.system() == 'Windows':
+                            os.system('type help.txt')
+                    else:
+                        os.system(rce)
+                except:
+                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
+        except:
+            pass
+
+    def plugins(plugin):
+        try:
+            os.chdir('exp/plugins/' + plugin)
+            while True:
+                try:
+                    sys.stdout.write(plugin + '_Manage>>>>')
+                    sys.stdout.flush()
+                    rce = sys.stdin.readline().strip()
+                    if rce == 'fcd':
+                        os.chdir('../../../')
+                        break
+                    elif rce == 'exit':
+                        sys.exit()
+                    elif rce == 'help':
+                        if platform.system() == 'Linux':
+                            os.system('cat help.txt')
+                        elif platform.system() == 'Windows':
+                            os.system('type help.txt')
+                    else:
+                        os.system(rce)
+                except:
+                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
+        except:
+            pass
+    def w(ve):
+        try:
+            os.chdir('exp/OS/windows/' + ve)
+            while True:
+                try:
+                    sys.stdout.write(ve + '_Manage>>>>')
+                    sys.stdout.flush()
+                    rce = sys.stdin.readline().strip()
+                    if rce == 'fcd':
+                        os.chdir('../../../../')
+                        break
+                    elif rce == 'exit':
+                        sys.exit()
+                    elif rce == 'help':
+                        if platform.system() == 'Linux':
+                            os.system('cat help.txt')
+                        elif platform.system() == 'Windows':
+                            os.system('type help.txt')
+                    else:
+                        os.system(rce)
+                except:
+                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
+        except:
+            pass
+
+    def l(version):
+        try:
+            os.chdir('exp/OS/linux/' + version)
+            while True:
+                try:
+                    sys.stdout.write(version + '_Manage>>>>')
+                    sys.stdout.flush()
+                    rce = sys.stdin.readline().strip()
+                    if rce == 'fcd':
+                        os.chdir('../../../../')
+                        break
+                    elif rce == 'exit':
+                        sys.exit()
+                    elif rce == 'help':
+                        if platform.system() == 'Linux':
+                            os.system('cat help.txt')
+                        elif platform.system() == 'Windows':
+                            os.system('type help.txt')
+                    else:
+                        os.system(rce)
+                except:
+                    print('??????????????当我打出？时，不是我有问题，是我觉得你有问题')
+        except:
+            pass
+
+    def helps():
+        help = '''
+    use <module>
+    -h/--help             
+    -v/--cve                      进入指定cve路径
+    -c/--cms                      进入指定cms路径
+    -p/--plugin                   进入指定组件路径
+    -w/--windows -l/--linux       进入指定系统路径              
+        '''
+        print(help)
