@@ -1,12 +1,6 @@
-csv
-io
-pdb
 exp10it
 chardet
-getopt
 datetime
-platform
 argparse
 termcolor
 colorama
-subprocess
