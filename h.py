@@ -7,6 +7,7 @@ import explists
 def console():
     logo=[explists.logo(),explists.logo2(),explists.logo3(),explists.logo4(),explists.logo5(),explists.logo6(),explists.logo7()]
     print(random.choice(logo))
+    print('\t\t\t\t\t\t一个exp货架罢了。。。')
     mode = (
         'help',
         'use',
