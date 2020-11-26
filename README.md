@@ -8,29 +8,3 @@ pip3 install -r requirements.txt -i https://pypi.tuna.tsinghua.edu.cn/simple
 包含渗透和提权exp/poc 内置脚本默认皆为已公开nday。前按照cve 、组件、cms、os分类，并且cve编号目录名的cve务必大写，OA、下载等系统可按照cms分类。所有目录下分类优先按照CVE编号分类，若无，则退而求其次。
 env下部分已编译支持win的可执行文件，如有遗漏自行编译。
 
-                                 
-                                 
-                                 
-    show cve                  查看poc列表 使用时为进入该poc目录
-    show shentou              来查看渗透poc模块大致清单 
-    show tiquan               查看提权模块大致清单
-    show log                  查看更新日志
-    exit                      退出
-    set                       进入指定类别 set cve 进入poc目录                    
-    fcd                       返回上级
-    部分poc内有帮助手册，可用在该poc目录下输入help查看。后续可以添加其他命令 
-    
-******************************************************************************************************************************** 
-    use <module>
-    -h/--help             
-    -v/--cve                      进入指定cve路径
-    -c/--cms                      进入指定cms路径
-    -p/--plugin                   进入指定组件路径
-    -w/--windows -l/--linux       进入指定系统路径
-                                  
-    实例：   use -v 2020-1938 
-            use -c cms
-            use -p nginx
-            use --linux centos5.5              直达poc下                
-
-
