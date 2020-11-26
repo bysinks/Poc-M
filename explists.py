@@ -6,7 +6,6 @@ colorama.init()
 def helps():
     logo='''
     [+]Poc-M
-    [+]1.0.1
     [+]基于python3.8
     [+]更多请参照help命令
     [+]show log查看更新日志
@@ -24,12 +23,10 @@ def help():
                                  
                                  
                                  
-    show cve                  查看poc列表 使用时为进入该poc目录
     show shentou              来查看渗透poc模块大致清单 
     show tiquan               查看提权模块大致清单
     show log                  查看更新日志
-    exit                      退出
-    set                       进入指定类别 set cve 进入poc目录                    
+    exit                      退出                 
     fcd                       返回上级
     部分poc内有帮助手册，可用在该poc目录下输入help查看。后续可以添加其他命令 
     
